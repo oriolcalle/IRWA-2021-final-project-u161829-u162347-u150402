@@ -1,4 +1,5 @@
-# IRWA-2021-final-project-u161829-u162347-u150402
+IRWA-2021-final-project-part-3
+
 Introduction
 Part 3 of the Search Engine project. Code designed to perform indexing, tf-idf weighting and tweet ranking (based on tf-idf score and our new custom score) for a given query on the tweet dataset that we processed in Part 1.
 Part 2 and part 1 code is also provided.
@@ -42,14 +43,14 @@ This should be the order of execution:
 	9. Deploy create_index_tfidf()
 	10. Run index,tf,df,idf = create_index_tfidf(filtered_tweets,num_documents)
 
-	Ranking Methods:
-	
+	Ranking Methods
+
 	11. Deploy rank_tfidf()
 	12. Deploy perform_date_substraction() and rank_custom()
 	13. Deploy w2v_vector()
 	14. Deploy rank_w2vec()
-	
-	Evaluation:
+
+	Evaluation
 	
 	15. Deploy search()
 	16. Deploy perform_query()
