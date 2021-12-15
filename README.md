@@ -13,8 +13,8 @@ Search engine web application for searching tweets in the dataset_tweets_WHO.txt
 │   ├── core  
 │   │    └── utils.py  
 │   └── sear_engine  
-│        ├── algorithms.py  
-│        └── search_engine.py  
+│      ├── algorithms.py  
+│      └── search_engine.py  
 │  
 ├── static  
 │   ├── data  
@@ -40,7 +40,7 @@ Search engine web application for searching tweets in the dataset_tweets_WHO.txt
 Project developed in Python 3.10.0  
 These are the following packages needed to run this project:  
 Package         Version  
---------------- ----------  
+   
 Faker           10.0.0  
 Flask           2.0.2  
 Jinja2          3.0.3  
