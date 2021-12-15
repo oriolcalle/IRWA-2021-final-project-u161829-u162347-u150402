@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  </head>
+  <body>
+    <h2 style="text-align:center;">Dashboard</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-5 chart">               
+                    <canvas id="myChart" width="500" height="350"></canvas>
+            </div>
+            <div class="col-5 chart">
+                <canvas id="myChart2" width="500" height="350"></canvas>
+            </div>
+            <div class="col-2 chart">
+                <br><br>
+                <h4 style="text-align:center;">Total Users</h4>
+                <h5 style="text-align:center; color:rgb(20, 20, 136);">{{total_users}}</h5>
+                <br><br>
+                <h4 style="text-align:center;">Total Sessions</h4>
+                <h5 style="text-align:center; color:rgb(20, 20, 136);">{{total_sessions}}</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5 chart">
+                <canvas id="myChart3" width="500" height="350"></canvas>
+            </div>
+            <div class="col-5 chart">
+                <canvas id="myChart4" width="500" height="350"></canvas>
+            </div>
+            <div class="col-2 chart">
+                <h4 style="text-align:center;">Total Queries</h4>
+                <h5 style="text-align:center; color:rgb(20, 20, 136);">{{total_queries}}</h5>
+                <br><br>
+                <h4 style="text-align:center;">Total Tweets Viewed</h4>
+                <h5 style="text-align:center; color:rgb(20, 20, 136);">{{total_clicks}}</h5>
+                
+
+            </div>
+        </div>
+    </div>
+  </body>
+
+<script>
+function color(){
+    var r = Math.floor(Math.random()*255);
+    var g = Math.floor(Math.random()*255);
+    var b = Math.floor(Math.random()*255);
+    return 'rgba('+r+', '+g+', '+b+', 0.7)'
+}
+
+function color_palette(len){
+    var palette = []
+    for(i=0;i<len;i++){
+        palette.push(color());
+    }
+    return palette
+}
+
+</script>
+
+<script>
+
+  let labels1 = {{plot3x | tojson}};
+  let data1 = {{plot3y}};
+  
+  let myDoughnutChart = document.getElementById("myChart").getContext('2d');
+  
+  let chart1 = new Chart(myDoughnutChart, {
+      type: 'line',
+      data: {
+          labels: labels1,
+          datasets: [ {
+              data: data1,
+              backgroundColor: ['#36CAAB']
+          }]
+      },
+      options: {
+          title: {
+              text: "Num of Sessions over time",
+              display: true
+          }
+      }
+  });
+
+  
+  let myChart2 = document.getElementById("myChart2").getContext('2d');
+    let labels2 = {{plot1x | tojson}};
+    let data2 = {{plot1y}};
+    var data = {
+            datasets: [{
+                data: data2,
+                backgroundColor: color_palette(labels2.length),
+            }],
+            labels: labels2}
+  let chart2 = new Chart(myChart2, {
+      type: 'bar',
+      data: data,
+      options: {
+          title: {
+              text: "Times a document with rank x was clicked",
+              display: true
+          },
+          legend: {
+            display: false
+          },
+          scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
+        }
+      }
+  });
+  
+  
+    let labels3 = {{plot4x | tojson}};
+    let data3 = {{plot4y}};
+  let myChart3 = document.getElementById("myChart3").getContext('2d');
+  
+  let chart3 = new Chart(myChart3, {
+    type: 'horizontalBar',
+    data: {
+      labels: labels3,
+      datasets: [
+        {
+            data: data3,
+            backgroundColor: color_palette(labels3.length)
+          
+        }
+      ]
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Top 10 most popular documents'
+      },
+      scales: {
+            xAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
+        }
+      
+    }
+});
+  
+
+  let labels4 = {{plot2x | tojson}};
+  let data4 = {{plot2y}};
+  let colors4 = color_palette(labels4.length);
+  
+  let myChart4 = document.getElementById("myChart4").getContext('2d');
+  
+  let chart4 = new Chart(myChart4, {
+      type: 'pie',
+      data: {
+          labels: labels4,
+          datasets: [ {
+              data: data4,
+              backgroundColor: colors4
+          }]
+      },
+      options: {
+          title: {
+              text: "Platform",
+              display: true
+          }
+      }
+  });
+</script>
+
+
+</html>

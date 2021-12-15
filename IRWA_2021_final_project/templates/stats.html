@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block page_title %}{{ page_title }}{% endblock %}
+{% block content %}
+    USERS
+    <hr> 
+
+    {% for user in users_data %}
+    <div class="pb-3">
+        <div class="">
+            {{ user }}
+        </div>
+
+    </div>
+
+    {% endfor %}
+    </hr> 
+    <hr>
+    SESSIONS
+    </hr>
+    <hr>
+    {% for s in session_data %}
+    <div class="pb-3">
+        <div class="">
+            {{ s }}
+        </div>
+
+    </div>
+
+    {% endfor %}
+    </hr>
+    <hr>
+    QUERIES
+    </hr>
+    <hr>
+
+    {% for q in query_data %}
+    <div class="pb-3">
+        <div class="">
+            {{ q }}
+        </div>
+
+    </div>
+
+    {% endfor %}
+    </hr>
+    <hr>
+    DOCS CLICKED
+    </hr>
+    <hr>
+    {% for doc in clicks_data %}
+        <div class="pb-3">
+            <div class="">
+                {{ doc.title }}
+            </div>
+            <div class="">
+            </div>
+            <div class="">
+                {{ doc.doc_date }} — {{ doc.description }}
+            </div>
+
+        </div>
+
+    {% endfor %}
+    </hr>
+{% endblock %}
+
+
+</body>
+</html>
