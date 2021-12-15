@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+    Found <strong>{{ found_counter }}</strong> results...
+    <hr>
+    {% for item in results_list %}
+        <div class="pb-3">
+            <!-- <div class="doc-title">
+                {% set url = item.url + "&search_query="+ query + "&time=" +time %}
+                <a href="{{url}}">{{ item.username }} - {{ item.title }}...
+                </a>
+            </div> -->
+            <div class="doc-title">
+                <a href="/doc_details?id={{ item.id }}&ranking={{ item.rank }}&search_query={{ query }}&time={{ time }}">{{ item.username }} - {{ item.title }}...
+                </a>
+            </div>
+            <div class="cited">
+                <cite> <a target="_blank" href="{{ item.url }}">{{ item.url }}</a></cite>
+            </div>
+            <div class="doc-desc">
+                {{ item.doc_date }} — {{ item.description }}
+            </div>
+
+        </div>
+
+    {% endfor %}
+{% endblock %}
+
